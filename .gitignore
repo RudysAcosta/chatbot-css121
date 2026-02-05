@@ -10,6 +10,10 @@ venv/
 ENV/
 env/
 
+# Environment files
+.env
+.env.local
+
 # Node / Vue
 node_modules/
 dist/
