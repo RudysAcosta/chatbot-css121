@@ -1,0 +1,30 @@
+{
+    "name": "I am ChatBot, your virtual assistant.",
+    "weather": "The weather is snowy today. Don't forget to wear warm clothes!",
+    "joke": "Why did the scarecrow win an award? Because he was outstanding in his field!",
+    "help": "Sure! I can help you with information about the weather, tell you a joke, or answer questions about myself.",
+
+    "hello": "Hello! Nice to meet you 😊",
+    "hi": "Hi there! How can I help you today?",
+
+    "time": "I can't check the exact time yet, but it's always a good time to learn something new!",
+    "date": "I don't know today's date, but today is a perfect day to code 😄",
+
+    "creator": "I was created by a programmer who is learning Python.",
+    "language": "I am written in Python 🐍",
+    "version": "This is a simple chatbot version 1.0",
+
+    "thanks": "You're welcome! I'm happy to help 😊",
+    "thank you": "No problem at all!",
+
+    "how are you": "I'm doing great! Thanks for asking.",
+    "what can you do": "I can answer simple questions, tell jokes, and chat with you.",
+
+    "food": "I don't eat food, but I hear pizza is very popular 🍕",
+    "coffee": "I don't drink coffee, but it smells amazing ☕",
+
+    "study": "Studying a little every day is the key to success 📚",
+    "coding": "Coding is fun! Keep practicing and you'll get better every day 💻",
+
+    "error": "Hmm, I didn't understand that. Try typing 'help'."
+}
