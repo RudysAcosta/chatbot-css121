@@ -1,7 +1,18 @@
+import os
 from flask import Flask, jsonify, request
+from flask_cors import CORS
+from dotenv import load_dotenv
 import chatbot
 
+load_dotenv(".env.local")
+
 app = Flask(__name__)
+
+frontend_url = os.getenv("FRONTEND_URL")
+if frontend_url:
+    CORS(app, resources={r"/*": {"origins": frontend_url}})
+else:
+    CORS(app)
 
 
 @app.get("/")
@@ -17,5 +28,14 @@ def chat():
     return jsonify({"response": response})
 
 
+def parse_bool(value, default=False):
+    if value is None:
+        return default
+    return str(value).strip().lower() in {"1", "true", "yes", "on"}
+
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5050, debug=True)
+    host = os.getenv("FLASK_HOST", "0.0.0.0")
+    port = int(os.getenv("PORT", os.getenv("FLASK_RUN_PORT", "5000")))
+    debug = parse_bool(os.getenv("FLASK_DEBUG"), default=True)
+    app.run(host=host, port=port, debug=debug)
