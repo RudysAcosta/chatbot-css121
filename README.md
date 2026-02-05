@@ -9,6 +9,7 @@ The chatbot reads predefined responses from a JSON file and exposes them through
 - REST API endpoint for chat
 - CLI mode for local testing
 - Vue home page with a mini chat UI
+- API key protection on the `/chat` endpoint
 
 ## Requirements
 - Python 3.8+
@@ -37,6 +38,7 @@ FLASK_HOST=0.0.0.0
 PORT=5050
 FLASK_DEBUG=1
 FRONTEND_URL=http://localhost:5173
+API_KEY=changeme-123
 ```
 
 ## Run the API
@@ -55,6 +57,7 @@ curl http://localhost:5050/
 ```bash
 curl -X POST http://localhost:5050/chat \
   -H "Content-Type: application/json" \
+  -H "x-api-key: changeme-123" \
   -d '{"message":"hello"}'
 ```
 
@@ -77,6 +80,7 @@ Create a frontend env file:
 `/Users/ncrousset/Code/CSC_121/week4/chatbot/frontend/.env.local`
 ```env
 VITE_API_URL=http://localhost:5050/chat
+VITE_API_KEY=changeme-123
 ```
 
 ### 3. Run the dev server
@@ -85,6 +89,7 @@ npm run dev
 ```
 
 The frontend expects the API at `http://localhost:5050/chat`.
+The Vite dev server is fixed to port `5173`.
 
 ## Project Structure
 - `app.py` — Flask API

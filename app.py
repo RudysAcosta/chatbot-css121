@@ -14,6 +14,8 @@ if frontend_url:
 else:
     CORS(app)
 
+API_KEY = os.getenv("API_KEY")
+
 
 @app.get("/")
 def health():
@@ -22,6 +24,11 @@ def health():
 
 @app.post("/chat")
 def chat():
+    if API_KEY:
+        provided_key = request.headers.get("x-api-key", "")
+        if provided_key != API_KEY:
+            return jsonify({"error": "Unauthorized"}), 401
+
     data = request.get_json(silent=True) or {}
     message = data.get("message", "")
     response = chatbot.get_response(message)

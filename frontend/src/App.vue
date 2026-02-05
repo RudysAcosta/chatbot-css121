@@ -53,6 +53,7 @@
 import { onMounted, nextTick, ref } from "vue";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/chat";
+const API_KEY = import.meta.env.VITE_API_KEY || "";
 
 const input = ref("");
 const isLoading = ref(false);
@@ -85,7 +86,10 @@ const sendMessage = async () => {
   try {
     const res = await fetch(API_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": API_KEY,
+      },
       body: JSON.stringify({ message: text }),
     });
 
@@ -93,7 +97,7 @@ const sendMessage = async () => {
     messages.value.push({
       role: "bot",
       roleLabel: "Bot",
-      text: data.response || "No response from server.",
+      text: data.response || data.error || "No response from server.",
     });
   } catch (err) {
     messages.value.push({
