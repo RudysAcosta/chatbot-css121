@@ -11,6 +11,7 @@ The chatbot reads predefined responses from a JSON file and exposes them through
 - Vue home page with a mini chat UI
 - API key protection on the `/chat` endpoint
 - CORS restricted to the origin defined in `.env.local`
+- Rate limiting on `/chat`
 
 ## Requirements
 - Python 3.8+
@@ -40,6 +41,7 @@ PORT=5050
 FLASK_DEBUG=1
 FRONTEND_URL=http://localhost:5173
 API_KEY=changeme-123
+RATE_LIMIT=10 per minute
 ```
 
 ## Run the API

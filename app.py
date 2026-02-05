@@ -2,6 +2,8 @@ import os
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from dotenv import load_dotenv
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 import chatbot
 
 load_dotenv(".env.local")
@@ -14,6 +16,12 @@ if frontend_url:
 
 API_KEY = os.getenv("API_KEY")
 
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=[],
+)
+
 
 @app.get("/")
 def health():
@@ -21,6 +29,7 @@ def health():
 
 
 @app.post("/chat")
+@limiter.limit(os.getenv("RATE_LIMIT", "10 per minute"))
 def chat():
     if API_KEY:
         provided_key = request.headers.get("x-api-key", "")
