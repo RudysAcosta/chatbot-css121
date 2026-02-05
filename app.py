@@ -42,5 +42,5 @@ def parse_bool(value, default=False):
 if __name__ == "__main__":
     host = os.getenv("FLASK_HOST", "0.0.0.0")
     port = int(os.getenv("PORT", os.getenv("FLASK_RUN_PORT", "5000")))
-    debug = parse_bool(os.getenv("FLASK_DEBUG"), default=True)
+    debug = parse_bool(os.getenv("FLASK_DEBUG"), default=False)
     app.run(host=host, port=port, debug=debug)
