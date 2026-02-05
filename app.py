@@ -10,9 +10,7 @@ app = Flask(__name__)
 
 frontend_url = os.getenv("FRONTEND_URL")
 if frontend_url:
-    CORS(app, resources={r"/*": {"origins": frontend_url}})
-else:
-    CORS(app)
+    CORS(app, resources={r"/*": {"origins": [frontend_url]}})
 
 API_KEY = os.getenv("API_KEY")
 

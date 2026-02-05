@@ -10,6 +10,7 @@ The chatbot reads predefined responses from a JSON file and exposes them through
 - CLI mode for local testing
 - Vue home page with a mini chat UI
 - API key protection on the `/chat` endpoint
+- CORS restricted to the origin defined in `.env.local`
 
 ## Requirements
 - Python 3.8+
