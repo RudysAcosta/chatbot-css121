@@ -1,0 +1,25 @@
+services:
+  backend:
+    build:
+      context: .
+    container_name: chatbot-backend
+    environment:
+      FLASK_HOST: 0.0.0.0
+      PORT: 5050
+      FLASK_DEBUG: 0
+      FRONTEND_URL: https://chatbot.ncrousset.dev
+      API_KEY: ${API_KEY}
+      RATE_LIMIT: "10 per minute"
+    expose:
+      - "5050"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: /api/chat
+    container_name: chatbot-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend

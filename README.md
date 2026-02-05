@@ -12,13 +12,14 @@ The chatbot reads predefined responses from a JSON file and exposes them through
 - API key protection on the `/chat` endpoint
 - CORS restricted to the origin defined in `.env.local`
 - Rate limiting on `/chat`
+- Docker + Docker Compose ready (backend + frontend)
 
 ## Requirements
 - Python 3.8+
 - Flask
 - Node.js 18+ (for the Vue frontend)
 
-## Setup (Backend)
+## Local Setup (Backend)
 
 ### 1. Create and activate a virtual environment
 ```bash
@@ -94,6 +95,29 @@ npm run dev
 The frontend expects the API at `http://localhost:5050/chat`.
 The Vite dev server is fixed to port `5173`.
 
+## Docker (Local / EC2)
+
+### 1. Create a Docker env file
+Create `.env.docker` in the project root:
+```env
+API_KEY=your-strong-key
+```
+
+### 2. Build and run
+```bash
+docker compose --env-file .env.docker up -d --build
+```
+
+### 3. Access
+The frontend will be available on port `80`.
+The API is proxied at `/api/chat` from the same domain.
+
+### Notes
+- The frontend Docker image uses Nginx and proxies `/api/` to the backend container.
+- `VITE_API_URL` is injected at build time and set to `/api/chat` for Docker.
+
+> If you use a subdomain (e.g., `chatbot.ncrousset.dev`), point it to your EC2 public IP.
+
 ## Project Structure
 - `app.py` — Flask API
 - `main.py` — CLI version
@@ -101,6 +125,9 @@ The Vite dev server is fixed to port `5173`.
 - `responses.json` — predefined responses
 - `requirements.txt` — dependencies
 - `frontend/` — Vue app
+- `docker-compose.yml` — Docker services
+- `Dockerfile` — backend image
+- `frontend/Dockerfile` — frontend image
 
 ---
 
